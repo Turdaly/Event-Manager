@@ -75,7 +75,7 @@ const selectedEvent = ref<Types.Event.MyEvent | null>(null);
 const isActive = ref(false);
 const handleDayClick = (day: Types.Template.Day) => {
   const event = eventsStore.myEvents.find(
-    (event) => new Date(event.dates).toDateString() === day.date.toDateString()
+    (event) => new Date(event.date).toDateString() === day.date.toDateString()
   );
   if (event) {
     selectedEvent.value = event;

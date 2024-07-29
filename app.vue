@@ -23,19 +23,5 @@ useSeoMeta({
   creator: "Yelnur",
 });
 const auth = useAuth()
-const onCreated = () => {
-  const token = useCookie("token");
-  const clientId = useCookie("clientId");
-  if (auth.user.id === null && clientId.value) auth.user.id = clientId.value;
-  if (token.value) {
-    const decoded = decodeJwt(token.value);
-    if (decoded) {
-      auth.user.name = decoded.name;
-      auth.user.email = decoded.email;
-      auth.user.picture = decoded.picture;
-      auth.user.given_name = decoded.given_name;
-    }
-  }
-};
-onCreated();
+
 </script>

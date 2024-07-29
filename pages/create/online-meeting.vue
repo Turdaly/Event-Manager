@@ -12,7 +12,7 @@
         Meeting
       </template>
       <template v-slot:labelUrl>
-        Address
+        Meeting Url
       </template>
       <template v-slot:textBtn>
         Meeting

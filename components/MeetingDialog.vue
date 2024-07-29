@@ -27,7 +27,7 @@
           <p>Invited Participants:</p>
           <p>
             Meeting URL:
-            <a :href="meeting.link_address" target="_blank">{{ meeting.link_address }}</a>
+            <NuxtLink  :to="meeting.link_address" target="_blank" rel="noopener" class="t-text-accent">{{ meeting.link_address }}</NuxtLink>
           </p>
         </v-card-text>
 

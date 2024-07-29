@@ -48,7 +48,11 @@
           counter
           @click:append="show1 = !show1"
         ></v-text-field>
-        <v-btn class="text-capitalize t-w-full" type="submit" size="large" color="#5271ff"
+        <v-btn
+          class="text-capitalize t-w-full"
+          type="submit"
+          size="large"
+          color="#5271ff"
           >Sign Up</v-btn
         >
         <NuxtLink
@@ -89,6 +93,13 @@ const submit = async () => {
           errors: { id: string; errorMessages: string[] }[];
         }) => {
           if (v.valid) {
+            const data: Types.CustomUser = {
+              id: Date.now().toString(),
+              name: name.value,
+              email: email.value,
+              pasword: password.value
+            };
+            await auth.postUser(data);
           }
         }
       );
@@ -109,7 +120,7 @@ const handleLoginSuccess = (response: CredentialResponse) => {
       token.value = response.credential;
       const decoded = decodeJwt(token.value);
       if (decoded) {
-        console.log(decoded)
+        console.log(decoded);
         auth.user.name = decoded.name;
         auth.user.given_name = decoded.given_name;
         auth.user.email = decoded.email;

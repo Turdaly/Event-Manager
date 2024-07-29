@@ -9,4 +9,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
   else {
     if(to.name !== 'login' && to.name !== 'auth') return navigateTo({ name: 'login'})
   }
+  if (to.matched.length === 0) {
+    navigateTo({ name: 'error' })
+  }
 });

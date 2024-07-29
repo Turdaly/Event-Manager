@@ -10,18 +10,23 @@ declare global {
       pasword: string;
     }
     export namespace Event {
+      export type TypeEvent =
+        | "online-meeting"
+        | "offline-meeting"
+        | "webinar"
+        | "livestream";
       export interface MyEvent {
-        id: number;
+        id: string;
         title: string;
-        isComplete: boolean;
-        dates: number;
+        date: string;
         color: string;
+        type: TypeEvent;
+        isComplete: boolean;
         startDateTime: string;
         link_address: string;
       }
-
       export interface Attribute {
-        dates: number;
+        dates: string;
         highlight: {
           style: {
             backgroundColor: string;

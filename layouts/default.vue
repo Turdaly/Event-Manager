@@ -40,7 +40,7 @@
               alt="img user"
               rounded
               cover
-              :src="auth.user.picture || `${imageUrl}`"
+              :src="auth.user.picture"
             >
             </v-img>
             <p class="t-text-sm">{{ auth.user.name }}</p>
@@ -75,5 +75,4 @@ const menuItems = [
   },
 ];
 
-const { public: { imageUrl } } = useRuntimeConfig()
 </script>

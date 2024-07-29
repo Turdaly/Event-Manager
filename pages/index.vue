@@ -54,7 +54,7 @@
 
 <script setup lang="ts">
 const eventsStore = useEventsStore();
-
+const auth = useAuth()
 
 </script>
 

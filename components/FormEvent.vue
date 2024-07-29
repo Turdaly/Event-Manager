@@ -8,8 +8,13 @@
         Start with the key details about your
         <slot name="paragraph">Meeting</slot>
       </h3>
-      <div class="t-flex t-flex-col">
+      <v-form
+        ref="form"
+        @submit.prevent="submit"
+        class="t-flex t-flex-col t-gap-2"
+      >
         <v-text-field
+          v-model="title"
           :rules="[rules.required]"
           variant="outlined"
           color="#5271ff"
@@ -21,6 +26,7 @@
         </v-text-field>
         <div class="t-flex t-gap-2">
           <v-date-input
+            v-model="startDate"
             :rules="[rules.required]"
             label="Start Date"
             variant="outlined"
@@ -30,7 +36,7 @@
             clearable
           ></v-date-input>
           <v-text-field
-            v-model="time"
+            v-model="startTime"
             :rules="[rules.required]"
             :active="modal2"
             :focused="modal2"
@@ -38,30 +44,99 @@
             variant="outlined"
           >
             <v-dialog v-model="modal2" activator="parent" width="auto">
-              <v-time-picker v-if="modal2" v-model="time"></v-time-picker>
+              <v-time-picker v-if="modal2" v-model="startTime"></v-time-picker>
             </v-dialog>
           </v-text-field>
         </div>
         <v-text-field
+          v-model="link_address"
           :rules="[rules.required]"
           variant="outlined"
           color="#5271ff"
           base-color="#5271ff"
-          ><template v-slot:label>
-            <slot name="labelUrl"></slot>
-          </template></v-text-field
+          ><template v-slot:label> <slot name="labelUrl"></slot> </template
+        ></v-text-field>
+        <v-btn
+          :disabled="loading"
+          :loading="loading"
+          class="text-capitalize"
+          type="submit"
+          color="#5271ff"
+          size="large"
         >
-        <v-btn class="text-capitalize" color="#5271ff" size="large">
           Create <slot name="textBtn">Meeting</slot>
         </v-btn>
-      </div>
+      </v-form>
     </div>
   </section>
 </template>
 <script setup lang="ts">
 import { VDateInput } from "vuetify/labs/VDateInput";
 import { VTimePicker } from "vuetify/labs/VTimePicker";
-const time = ref(null);
-const menu2 = ref(false);
 const modal2 = ref(false);
+const route = useRoute();
+// form state
+const form = ref<any>();
+const title = ref<string>("");
+const startDate = ref<string | null>(null);
+const startTime = ref<string>("");
+const link_address = ref<string>("");
+
+// Extra
+const loading = ref<boolean>(false);
+// form actions
+const eventsStore = useEventsStore();
+const submit = async () => {
+  try {
+    await form.value
+      .validate()
+      .then(
+        async (v: {
+          valid: boolean;
+          errors: { id: string; errorMessages: string[] }[];
+        }) => {
+          if (v.valid) {
+            loading.value === true;
+            const data: Types.Event.MyEvent = {
+              id: Date.now().toString(),
+              title: title.value,
+              date: startDate.value as string,
+              color: "#5271ff",
+              type: getEventType(),
+              isComplete: false,
+              startDateTime: startDate.value as string,
+              link_address: link_address.value,
+            };
+            await eventsStore.postEvent(data);
+
+            setTimeout(() => {
+              loading.value = false;
+            }, 2000);
+            resetForm();
+            navigateTo({ name: "my-events" });
+          }
+        }
+      );
+  } catch (err) {
+    loading.value = false;
+    console.log(err);
+  }
+};
+
+const resetForm = () => {
+  title.value = "";
+  startDate.value = "";
+  startTime.value = "";
+  link_address.value = "";
+};
+
+// getting typeEvent
+const getEventType = () => {
+  const pathSegments = route.path.split("/");
+  return pathSegments[pathSegments.length - 1] as Types.Event.TypeEvent;
+};
+
+onMounted(() => {
+  getEventType()
+})
 </script>

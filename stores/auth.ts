@@ -9,6 +9,9 @@ export const useAuth = defineStore("auth", () => {
   const user = ref<User>(new User());
   const users = ref<Types.CustomUser[]>([]);
   const userUrl = "/users";
+  const {
+    public: { imageURL, fakeToken },
+  } = useRuntimeConfig();
   const logout = () => {
     user.value = new User();
     const token = useCookie("token");
@@ -22,20 +25,48 @@ export const useAuth = defineStore("auth", () => {
     password: string
   ): boolean => {
     const isValid = users.value.find(
-      (user) => user.email === email && user.pasword === "user@user.com"
+      (user) => user.email === email && user.pasword === password
     );
-    if (isValid) return true;
-    else return false;
+    if (isValid) {
+      console.log("isValid");
+      user.value.id = isValid.id;
+      user.value.given_name = isValid.name;
+      user.value.email = isValid.email;
+      user.value.picture = imageURL as string;
+      const token = useCookie('token')
+      const clientId = useCookie('clientId')
+      token.value = fakeToken
+      clientId.value = user.value.id
+      return true;
+    }
+    console.log('outside if')
+    console.log('isValid', isValid)
+    console.log('users', users.value)
+    return false;
   };
   const postUser = async <T>(data: Types.CustomUser) => {
     try {
       if (data) {
-        const { $api } = useNuxtApp();
-        const response = await $api.post(userUrl, data);
+        if (await isUserExists(data)) {
+          console.log("this email is already exist");
+          return false;
+        } else {
+          const { $api } = useNuxtApp();
+          const response = await $api.post(userUrl, data);
+          console.log("successfully added new user");
+          navigateTo({ name: "login" });
+          return true;
+        }
       }
     } catch (err) {
       console.log(err);
     }
+  };
+  const isUserExists = async (data: Types.CustomUser): Promise<boolean> => {
+    await fetchUser();
+    const isValid = users.value.find((user) => user.email === data.email);
+    if (isValid) return true;
+    else return false;
   };
   const fetchUser = async () => {
     try {

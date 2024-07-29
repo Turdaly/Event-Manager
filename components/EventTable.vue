@@ -1,5 +1,5 @@
 <template>
-  <div v-if="meetings">
+  <div v-if="meetings.length > 0">
     <table class="t-min-w-full t-divide-y">
       <thead class="">
         <tr>
@@ -48,6 +48,7 @@
               <Icon
                 name="material-symbols:delete-outline-rounded"
                 class="t-text-red-500 t-size-5"
+                @click="eventsStore.removeEvent(meeting.id)"
               />
             </div>
           </td>
@@ -58,9 +59,9 @@
 </template>
 
 <script setup lang="ts">
-
+const eventsStore = useEventsStore()
 
 defineProps<{
-  meetings?: Types.Event.MyEvent[]
+  meetings: Types.Event.MyEvent[]
 }>()
 </script>

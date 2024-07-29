@@ -6,8 +6,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
     public: {
-      imagerl:
-        "https://cdn1.iconfinder.com/data/icons/mix-color-3/502/Untitled-7-1024.png",
+      imageURL: process.env.IMAGE_URL,
+      fakeToken: process.env.NUXT_FAKETOKEN,
     },
   },
   modules: [
