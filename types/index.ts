@@ -3,6 +3,12 @@ export {};
 
 declare global {
   export namespace Types {
+    export interface CustomUser {
+      id: string;
+      name: string;
+      email: string;
+      pasword: string;
+    }
     export namespace Event {
       export interface MyEvent {
         id: number;

@@ -66,7 +66,11 @@ const submit = async () => {
           errors: { id: string; errorMessages: string[] }[];
         }) => {
           if (v.valid) {
-            
+            await auth.fetchUser();
+            if (
+              auth.validateUserCredentials(email.value, password.value) === true
+            )
+              return navigateTo({ name: "index" });
           }
         }
       );
@@ -87,14 +91,15 @@ const handleLoginSuccess = (response: CredentialResponse) => {
       token.value = response.credential;
       const decoded = decodeJwt(token.value);
       if (decoded) {
+        console.log(decoded);
         auth.user.name = decoded.name;
         auth.user.given_name = decoded.given_name;
         auth.user.email = decoded.email;
         auth.user.picture = decoded.picture;
       }
     }
-    navigateTo({ name: "index" });
   }
+  navigateTo({ name: "index" });
 };
 
 const handleLoginError = () => {

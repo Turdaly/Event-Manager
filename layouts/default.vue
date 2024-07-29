@@ -33,14 +33,14 @@
               </li>
             </ul>
           </div>
-          <div v-if="auth.user" class="t-flex t-flex-col t-items-center t-gap-4 t-mt-12">
+          <div class="t-flex t-flex-col t-items-center t-gap-4 t-mt-12">
             <v-img
               :width="50"
               aspect-ratio="1/1"
               alt="img user"
               rounded
               cover
-              :src="auth.user.picture"
+              :src="auth.user.picture || `${imageUrl}`"
             >
             </v-img>
             <p class="t-text-sm">{{ auth.user.name }}</p>
@@ -74,4 +74,6 @@ const menuItems = [
     icon: "material-symbols:settings-outline",
   },
 ];
+
+const { public: { imageUrl } } = useRuntimeConfig()
 </script>

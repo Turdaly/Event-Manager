@@ -4,6 +4,12 @@ export default defineNuxtConfig({
   ssr: false,
   compatibilityDate: "2024-04-03",
   devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      imagerl:
+        "https://cdn1.iconfinder.com/data/icons/mix-color-3/502/Untitled-7-1024.png",
+    },
+  },
   modules: [
     "@nuxtjs/tailwindcss",
     "nuxt-icon",
@@ -12,6 +18,7 @@ export default defineNuxtConfig({
     "@samk-dev/nuxt-vcalendar",
     "nuxt-vue3-google-signin",
   ],
+  plugins: ["~/plugins/axios.ts"],
   googleSignIn: {
     clientId:
       "422548645038-2nsnktflcnpnd0hqc1m7uuipdjace8bg.apps.googleusercontent.com",
@@ -23,5 +30,19 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
   },
   experimental: { viewTransition: true },
-  
+  hooks: {
+    "pages:extend"(pages) {
+      function setMiddleware(pages: NuxtPage[]) {
+        for (const page of pages) {
+          page.meta ||= {};
+          page.meta.middleware = ["auth"];
+
+          if (page.children) {
+            setMiddleware(page.children);
+          }
+        }
+      }
+      setMiddleware(pages);
+    },
+  },
 });
