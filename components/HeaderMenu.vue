@@ -6,7 +6,7 @@
         :key="index"
         class="t-p-2 hover:t-bg-hover t-transition-colors"
       >
-        <NuxtLink :to="item.link" class="">
+        <NuxtLink :to="{ name: item.link }">
           {{ item.title }}
         </NuxtLink>
       </li>
@@ -16,8 +16,8 @@
 
 <script setup lang="ts">
 const headerItems: Types.Template.HeaderItem[] = [
-  { title: "Create Event", link: "/create-event" },
-  { title: "My Events", link: "/myEvents" },
-  { title: "Calendar Event", link: "/calendar-event" },
+  { title: "Create Event", link: "events" },
+  { title: "My Events", link: "my-events" },
+  { title: "Calendar", link: "my-events-calendar" },
 ];
 </script>

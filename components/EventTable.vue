@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <table v-if="meetings" class="t-min-w-full t-divide-y">
+  <div v-if="meetings">
+    <table class="t-min-w-full t-divide-y">
       <thead class="">
         <tr>
           <th
@@ -38,7 +38,7 @@
             {{ meeting.startDateTime }}
           </td>
           <td class="t-px-6 t-py-4 t-whitespace-nowrap">
-            <NuxtLink :to="meeting.link" target="_blank" class="t-text-accent"
+            <NuxtLink :to="meeting.link_address" target="_blank" class="t-text-accent"
               >Link</NuxtLink
             >
           </td>
@@ -54,9 +54,6 @@
         </tr>
       </tbody>
     </table>
-    <div v-else>
-      <slot name="message"></slot>
-    </div>
   </div>
 </template>
 
@@ -64,6 +61,6 @@
 
 
 defineProps<{
-  meetings?: Types.Event.Meeting[]
+  meetings?: Types.Event.MyEvent[]
 }>()
 </script>

@@ -25,7 +25,7 @@
       <h3 class="t-text-xl t-font-medium t-mb-4">Calendar</h3>
       <div class="t-w-full t-h-full">
         <VCalendar
-          :attributes="attributes"
+          :attributes="eventsStore.attributes"
           locale="en"
           style="width: 100%; height: 100%"
         />
@@ -37,7 +37,7 @@
       <h3 class="t-font-medium t-text-xl t-mb-4">
         My Events
       </h3>
-      <EventTable :meetings="eventsStore.meetings">
+      <EventTable :meetings="eventsStore.myEvents">
         <template v-slot:title>
           Meeting Title
         </template>
@@ -55,29 +55,7 @@
 <script setup lang="ts">
 const eventsStore = useEventsStore();
 
-const todos = ref([
-  {
-    description: "Take Noah to basketball practice.",
-    isComplete: false,
-    dates: Date.now(),
-    color: "#5271ff",
-  },
-]);
 
-const attributes = computed(() => [
-  ...todos.value.map((todo) => ({
-    dates: todo.dates,
-    highlight: {
-      style: {
-        backgroundColor: `${todo.color}`,
-      },
-      ...(todo.isComplete && { class: "opacity-75" }),
-    },
-    popover: {
-      label: todo.description,
-    },
-  })),
-]);
 </script>
 
 <style scoped></style>

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog max-width="500" v-model="isActive">
+  <v-dialog max-width="500" v-model="isActive" v-if="meeting">
     <template v-slot:activator="{ props: activatorProps }">
       <p v-bind="activatorProps" @click="openDialog">View</p>
     </template>
@@ -27,7 +27,7 @@
           <p>Invited Participants:</p>
           <p>
             Meeting URL:
-            <a :href="meeting.link" target="_blank">{{ meeting.link }}</a>
+            <a :href="meeting.link_address" target="_blank">{{ meeting.link_address }}</a>
           </p>
         </v-card-text>
 
@@ -37,7 +37,7 @@
           <v-btn
             text="Open Meeting"
             color="#5271ff"
-            :href="meeting.link"
+            :href="meeting.link_address"
             target="_blank"
           ></v-btn>
         </div>
@@ -49,12 +49,8 @@
 <script lang="ts" setup>
 import { ref, defineProps } from 'vue';
 
-const props = defineProps<{
-  meeting: {
-    title: string;
-    startDateTime: string;
-    link: string;
-  };
+defineProps<{
+  meeting: Types.Event.MyEvent
 }>();
 
 const isActive = ref(false);
@@ -62,4 +58,6 @@ const isActive = ref(false);
 const openDialog = () => {
   isActive.value = true;
 };
+
+
 </script>

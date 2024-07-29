@@ -1,6 +1,34 @@
 import { defineStore } from "pinia";
 
 export const useEventsStore = defineStore("events", () => {
+
+  const myEvents = ref<Types.Event.MyEvent[]>([
+    {
+      id: 1,
+      title: 'Weekly Sync',
+      isComplete: false,
+      dates: Date.now(),
+      color: '#5271ff',
+      startDateTime: '2024-07-27 10:00 AM',
+      link_address: 'https://example.com/meeting/1',
+    },
+  ]);
+
+  const attributes: ComputedRef<Types.Event.Attribute[]> = computed(() => [
+    ...myEvents.value.map((todo) => ({
+      dates: todo.dates,
+      highlight: {
+        style: {
+          backgroundColor: `${todo.color}`,
+        },
+        ...(todo.isComplete && { class: "opacity-75" }),
+      },
+      popover: {
+        label: todo.title,
+      },
+    })),
+  ]);
+  // Template
   const events = ref({
     active: 0 as Number,
     attendees: 0 as Number,
@@ -33,19 +61,5 @@ export const useEventsStore = defineStore("events", () => {
       paragraph: 'Including Upcoming & Current',
     },
   ])
-  const meetings = ref<Types.Event.Meeting[]>([
-    {
-      id: 1,
-      title: 'Weekly Sync',
-      startDateTime: '2024-07-27 10:00 AM',
-      link: 'https://example.com/meeting/1',
-    },
-    {
-      id: 2,
-      title: 'Project Kickoff',
-      startDateTime: '2024-07-28 02:00 PM',
-      link: 'https://example.com/meeting/2',
-    },
-  ]);
-  return { events, eventItems, meetings };
+  return { events, eventItems, attributes, myEvents };
 });

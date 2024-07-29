@@ -24,7 +24,27 @@
                 <Icon :name="item.icon" class="t-size-6 t-text-accent" />
                 <NuxtLink :to="{ name: item.link }"> {{ item.name }} </NuxtLink>
               </li>
+              <li
+                @click="auth.logout"
+                class="t-flex t-items-center t-gap-3 t-px-6 t-py-2 hover:t-bg-hover t-cursor-pointer"
+              >
+                <Icon name="tabler:logout-2" class="t-size-6 t-text-accent" />
+                Logout
+              </li>
             </ul>
+          </div>
+          <div v-if="auth.user" class="t-flex t-flex-col t-items-center t-gap-4 t-mt-12">
+            <v-img
+              :width="50"
+              aspect-ratio="1/1"
+              alt="img user"
+              rounded
+              cover
+              :src="auth.user.picture"
+            >
+            </v-img>
+            <p class="t-text-sm">{{ auth.user.name }}</p>
+            <p class="t-text-sm">{{ auth.user.email }}</p>
           </div>
         </div>
       </div>
@@ -44,10 +64,14 @@
 </template>
 
 <script setup lang="ts">
+const auth = useAuth();
 const menuItems = [
   { name: "Dashboard", link: "index", icon: "material-symbols:home" },
   { name: "Events", link: "events", icon: "material-symbols:calendar-month" },
-  { name: "Settings", link: "index", icon: "material-symbols:settings-outline" },
-  { name: "Logout", link: "index", icon: "tabler:logout-2" },
+  {
+    name: "Settings",
+    link: "index",
+    icon: "material-symbols:settings-outline",
+  },
 ];
 </script>
