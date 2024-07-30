@@ -72,7 +72,7 @@ const submit = async () => {
 
             ) {
               console.log('navigate to index')
-              navigateTo({ name: "index" });
+              return navigateTo({ name: "index" });
             }
           }
         }
