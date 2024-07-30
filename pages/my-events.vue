@@ -77,6 +77,7 @@ const getWebinarMeeting = computed(() => {
 const getLivestreamMeeting = computed(() => {
   return eventsStore.myEvents.filter((event) => event.type === "livestream");
 });
+
 onMounted(async () => {
   await eventsStore.fetchEvents();
 });

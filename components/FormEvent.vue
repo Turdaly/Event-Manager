@@ -108,7 +108,7 @@ const submit = async () => {
               color: "#5271ff",
               type: getEventType(),
               isComplete: false,
-              startDate: startDate.value as string,
+              startDate: getStartDate(),
               startTime: startTime.value as string,
               link_address: link_address.value,
             };
@@ -140,6 +140,10 @@ const getEventType = () => {
   const pathSegments = route.path.split("/");
   return pathSegments[pathSegments.length - 1] as Types.Event.TypeEvent;
 };
+const getStartDate = ():string => {
+  if(startDate.value) return startDate.value.toString().slice(0, 10)
+  else return ''
+}
 
 onMounted(() => {
   getEventType()

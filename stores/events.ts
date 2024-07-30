@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 
 export const useEventsStore = defineStore("events", () => {
-  const auth = useAuth()
+  const auth = useAuth();
   const { $api } = useNuxtApp();
   const url = "/myEvents";
   const myEvents = ref<Types.Event.MyEvent[]>([]);
 
+  // Request
   const postEvent = async (data: Types.Event.MyEvent) => {
     try {
       const response = await $api.post(url, data);
@@ -18,24 +19,26 @@ export const useEventsStore = defineStore("events", () => {
   const fetchEvents = async () => {
     try {
       const response = await $api.get(url);
-      if(response.data){
-        myEvents.value = response.data.filter((event: Types.Event.MyEvent) => event.email === auth.user.email)
+      if (response.data) {
+        myEvents.value = response.data.filter(
+          (event: Types.Event.MyEvent) => event.email === auth.user.email
+        );
       }
-      console.log('MyEvents:', myEvents.value)
+      console.log("MyEvents:", myEvents.value);
     } catch (err) {
       console.log(err);
     }
   };
   const removeEvent = async (id: string) => {
     try {
-      if(id) {
-        await $api.delete(`${url}/${id}`)
-        await fetchEvents()
+      if (id) {
+        await $api.delete(`${url}/${id}`);
+        await fetchEvents();
       }
-    } catch(err) {
-      console.log(err)
+    } catch (err) {
+      console.log(err);
     }
-  }
+  };
 
   const attributes: ComputedRef<Types.Event.Attribute[]> = computed(() => [
     ...myEvents.value.map((todo) => ({
@@ -51,38 +54,57 @@ export const useEventsStore = defineStore("events", () => {
       },
     })),
   ]);
-  // Template
-  const events = ref({
-    active: 0 as Number,
-    attendees: 0 as Number,
-    online: 0 as Number,
-    offline: 0 as Number,
+
+  const getOnlineMeeting = computed((): Types.Event.MyEvent[] => {
+    return myEvents.value.filter(
+      (event) => event.type === "online-meeting"
+    );
   });
+  const getOfflineMeeting = computed(() => {
+    return myEvents.value.filter(
+      (event) => event.type === "offline-meeting"
+    );
+  });
+  const getWebinarMeeting = computed(() => {
+    return myEvents.value.filter((event) => event.type === "webinar");
+  });
+  const getLivestreamMeeting = computed(() => {
+    return myEvents.value.filter((event) => event.type === "livestream");
+  });
+  // Template
+
   const eventItems = computed(() => [
     {
-      title: "Active Events",
-      count: events.value.active,
+      title: "Online Meeting",
+      count: getOnlineMeeting.value.length,
       icon: "material-symbols:calendar-month",
       paragraph: "Including Upcoming & Current",
     },
     {
-      title: "Event Attendees",
-      count: events.value.attendees,
+      title: "Offline Meeting",
+      count: getOfflineMeeting.value.length,
       icon: "material-symbols:event-available-rounded",
       paragraph: "Includes Active & Past Events",
     },
     {
-      title: "Online Events",
-      count: events.value.online,
+      title: "Webinar",
+      count: getWebinarMeeting.value.length,
       icon: "material-symbols:chart-data-outline",
       paragraph: "Including Upcoming & Current",
     },
     {
-      title: "My Events",
-      count: events.value.offline,
+      title: "Livestream",
+      count: getLivestreamMeeting.value.length,
       icon: "material-symbols:mail-outline",
       paragraph: "Including Upcoming & Current",
     },
   ]);
-  return { events, eventItems, attributes, myEvents, postEvent, fetchEvents, removeEvent };
+  return {
+    eventItems,
+    attributes,
+    myEvents,
+    postEvent,
+    fetchEvents,
+    removeEvent,
+  };
 });
