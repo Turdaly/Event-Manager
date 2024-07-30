@@ -17,12 +17,13 @@ declare global {
         | "livestream";
       export interface MyEvent {
         id: string;
+        email: string;
         title: string;
-        date: string;
         color: string;
         type: TypeEvent;
         isComplete: boolean;
-        startDateTime: string;
+        startTime: string;
+        startDate: string;
         link_address: string;
       }
       export interface Attribute {

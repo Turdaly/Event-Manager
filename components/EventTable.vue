@@ -1,6 +1,6 @@
 <template>
-  <div v-if="meetings.length > 0">
-    <table class="t-min-w-full t-divide-y">
+  <div v-if="meetings.length > 0" class="t-p-4">
+    <table class="t-divide-y t-w-full">
       <thead class="">
         <tr>
           <th
@@ -35,7 +35,7 @@
             {{ meeting.title }}
           </td>
           <td class="t-px-6 t-py-4 t-whitespace-nowrap">
-            {{ meeting.startDateTime }}
+            {{ meeting.startDate }} {{ meeting.startTime }}
           </td>
           <td class="t-px-6 t-py-4 t-whitespace-nowrap">
             <NuxtLink :to="meeting.link_address" target="_blank" class="t-text-accent"

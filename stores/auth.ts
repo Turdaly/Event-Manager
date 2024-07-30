@@ -1,4 +1,5 @@
 export const useAuth = defineStore("auth", () => {
+  // User data
   class User {
     id: string | null = null;
     email: string = "";
@@ -8,10 +9,14 @@ export const useAuth = defineStore("auth", () => {
   }
   const user = ref<User>(new User());
   const users = ref<Types.CustomUser[]>([]);
+  // url
   const userUrl = "/users";
+  // nuxt.config
   const {
     public: { imageURL, fakeToken },
   } = useRuntimeConfig();
+
+  // Actions
   const logout = () => {
     user.value = new User();
     const token = useCookie("token");
@@ -33,15 +38,15 @@ export const useAuth = defineStore("auth", () => {
       user.value.given_name = isValid.name;
       user.value.email = isValid.email;
       user.value.picture = imageURL as string;
-      const token = useCookie('token')
-      const clientId = useCookie('clientId')
-      token.value = fakeToken
-      clientId.value = user.value.id
+      const token = useCookie("token");
+      const clientId = useCookie("clientId");
+      token.value = fakeToken;
+      clientId.value = user.value.id;
       return true;
     }
-    console.log('outside if')
-    console.log('isValid', isValid)
-    console.log('users', users.value)
+    console.log("outside if");
+    console.log("isValid", isValid);
+    console.log("users", users.value);
     return false;
   };
   const postUser = async <T>(data: Types.CustomUser) => {

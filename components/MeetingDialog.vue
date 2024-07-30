@@ -22,25 +22,13 @@
           </p>
           <p>
             Start Date & Time:
-            <span class="t-text-accent">{{ meeting.startDateTime }}</span>
+            <span class="t-text-accent">{{ meeting.startDate }} {{ meeting.startTime }}</span>
           </p>
-          <p>Invited Participants:</p>
           <p>
             Meeting URL:
             <NuxtLink  :to="meeting.link_address" target="_blank" rel="noopener" class="t-text-accent">{{ meeting.link_address }}</NuxtLink>
           </p>
         </v-card-text>
-
-        <div class="t-flex t-justify-between t-p-6">
-          <v-btn color="#5271ff" variant="outlined">Add To Google Calendar</v-btn>
-
-          <v-btn
-            text="Open Meeting"
-            color="#5271ff"
-            :href="meeting.link_address"
-            target="_blank"
-          ></v-btn>
-        </div>
       </v-card>
     </template>
   </v-dialog>

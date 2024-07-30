@@ -73,17 +73,21 @@
 <script setup lang="ts">
 import { VDateInput } from "vuetify/labs/VDateInput";
 import { VTimePicker } from "vuetify/labs/VTimePicker";
+
 const modal2 = ref(false);
 const route = useRoute();
 // form state
 const form = ref<any>();
 const title = ref<string>("");
 const startDate = ref<string | null>(null);
-const startTime = ref<string>("");
+const startTime = ref<string | null>(null);
 const link_address = ref<string>("");
 
 // Extra
 const loading = ref<boolean>(false);
+
+// Store
+const auth = useAuth()
 // form actions
 const eventsStore = useEventsStore();
 const submit = async () => {
@@ -99,12 +103,13 @@ const submit = async () => {
             loading.value === true;
             const data: Types.Event.MyEvent = {
               id: Date.now().toString(),
+              email: auth.user.email,
               title: title.value,
-              date: startDate.value as string,
               color: "#5271ff",
               type: getEventType(),
               isComplete: false,
-              startDateTime: startDate.value as string,
+              startDate: startDate.value as string,
+              startTime: startTime.value as string,
               link_address: link_address.value,
             };
             await eventsStore.postEvent(data);

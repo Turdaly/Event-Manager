@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 
 export const useEventsStore = defineStore("events", () => {
+  const auth = useAuth()
   const { $api } = useNuxtApp();
   const url = "/myEvents";
   const myEvents = ref<Types.Event.MyEvent[]>([]);
@@ -17,7 +18,9 @@ export const useEventsStore = defineStore("events", () => {
   const fetchEvents = async () => {
     try {
       const response = await $api.get(url);
-      myEvents.value = response.data;
+      if(response.data){
+        myEvents.value = response.data.filter((event: Types.Event.MyEvent) => event.email === auth.user.email)
+      }
       console.log('MyEvents:', myEvents.value)
     } catch (err) {
       console.log(err);
@@ -36,7 +39,7 @@ export const useEventsStore = defineStore("events", () => {
 
   const attributes: ComputedRef<Types.Event.Attribute[]> = computed(() => [
     ...myEvents.value.map((todo) => ({
-      dates: todo.date,
+      dates: todo.startDate,
       highlight: {
         style: {
           backgroundColor: `${todo.color}`,

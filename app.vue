@@ -24,4 +24,17 @@ useSeoMeta({
 });
 const auth = useAuth()
 
+onMounted(() => {
+  const userInLocalStorage = localStorage.getItem("user");
+  if (userInLocalStorage) {
+    auth.user = JSON.parse(userInLocalStorage);
+  }
+});
+watch(
+  () => auth.user,
+  (state) => {
+    localStorage.setItem("user", JSON.stringify(state));
+  },
+  { deep: true }
+);
 </script>

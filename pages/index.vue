@@ -33,7 +33,7 @@
     </div>
 
     <!-- My Events -->
-    <div class="t-bg-primary t-p-6 t-rounded-lg t-shadow-md">
+    <div class="t-flex t-flex-col t-bg-primary t-p-6 t-rounded-lg t-shadow-md">
       <h3 class="t-font-medium t-text-xl t-mb-4">
         My Events
       </h3>
@@ -54,8 +54,9 @@
 
 <script setup lang="ts">
 const eventsStore = useEventsStore();
-const auth = useAuth()
 
+onMounted( async () => {
+  await eventsStore.fetchEvents()
+})
 </script>
 
-<style scoped></style>

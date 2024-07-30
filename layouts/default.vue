@@ -18,11 +18,13 @@
             <ul class="t-flex t-flex-col">
               <li
                 v-for="item in menuItems"
-                :key="item.name"
+                :key="item.title"
                 class="t-flex t-items-center t-gap-3 t-px-6 t-py-2 hover:t-bg-hover"
               >
                 <Icon :name="item.icon" class="t-size-6 t-text-accent" />
-                <NuxtLink :to="{ name: item.link }"> {{ item.name }} </NuxtLink>
+                <NuxtLink :to="{ name: item.link }">
+                  {{ item.title }}
+                </NuxtLink>
               </li>
               <li
                 @click="auth.logout"
@@ -49,12 +51,38 @@
         </div>
       </div>
     </aside>
-    <div class="t-flex t-flex-col t-w-full">
+    <div class="t-flex t-flex-col t-w-auto md:t-w-full t-px-4">
       <header class="t-p-4 t-bg-primary">
-        <nav class="t-flex t-justify-end t-gap-4">
-          <v-btn variant="outlined" color="#5271ff"> My Events </v-btn>
-          <v-btn color="#5271ff"> Create Event </v-btn>
+        <nav class="t-hidden md:t-flex t-gap-4 t-justify-end">
+          <NuxtLink :to="{ name: 'my-events' }"
+            ><v-btn variant="outlined" color="#5271ff">
+              My Events
+            </v-btn></NuxtLink
+          >
+          <NuxtLink :to="{ name: 'events' }">
+            <v-btn color="#5271ff"> Create Event </v-btn>
+          </NuxtLink>
         </nav>
+        <div class="t-flex t-justify-end md:t-hidden">
+          <v-menu transition="slide-y-transition">
+            <template v-slot:activator="{ props }">
+              <Icon
+                v-bind="props"
+                name="solar:hamburger-menu-outline"
+                class="t-size-9"
+              ></Icon>
+            </template>
+            <v-list class="">
+              <v-list-item v-for="(item, i) in menu" :key="i">
+                <NuxtLink :to="{ name: item.link }"
+                  ><v-list-item-title>{{
+                    item.title
+                  }}</v-list-item-title></NuxtLink
+                >
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </div>
       </header>
       <main class="t-p-5 t-bg-secondary">
         <slot> </slot>
@@ -66,13 +94,17 @@
 <script setup lang="ts">
 const auth = useAuth();
 const menuItems = [
-  { name: "Dashboard", link: "index", icon: "material-symbols:home" },
-  { name: "Events", link: "events", icon: "material-symbols:calendar-month" },
+  { title: "Dashboard", link: "index", icon: "material-symbols:home" },
+  { title: "Events", link: "events", icon: "material-symbols:calendar-month" },
   {
-    name: "Settings",
+    title: "Settings",
     link: "index",
     icon: "material-symbols:settings-outline",
   },
 ];
-
+const headerItems = [
+  { title: "My Events ", link: "my-events" },
+  { title: "Create Event", link: "events" },
+];
+const menu = [...headerItems, ...menuItems];
 </script>
