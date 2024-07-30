@@ -37,6 +37,9 @@
       <h3 class="t-font-medium t-text-xl t-mb-4">
         My Events
       </h3>
+      <p v-if="eventsStore.myEvents.length === 0">
+        You have no upcoming events
+      </p>
       <EventTable :meetings="eventsStore.myEvents">
         <template v-slot:title>
           Meeting Title
