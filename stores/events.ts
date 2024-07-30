@@ -32,7 +32,9 @@ export const useEventsStore = defineStore("events", () => {
           link_address: `${venue.city.name}, ${venue.state.stateCode} ${venue.name}`,
         };
         const response = await $api.post(url, newData);
-        if(response)
+        if(response){
+          return true
+        }
         console.log(response);
       }
     } catch (err) {

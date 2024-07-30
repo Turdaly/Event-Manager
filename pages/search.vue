@@ -22,13 +22,16 @@
           :key="event.id"
           class="t-w-full t-border-gray-400"
         >
-          <SearchCard :event="event" />
+          <SearchCard :event="event" @open-dialog="openDialog" />
         </div>
       </div>
       <div v-if="isFind === false">
         We're sorry, but we couldn't find any events.
       </div>
     </div>
+    <v-snackbar v-model="snackbar" :timeout="2500" color="#5271ff">
+      <p class="t-text-primary">Successfully added new event</p>
+    </v-snackbar>
   </div>
 </template>
 
@@ -40,6 +43,7 @@ const page = ref<number>(0);
 const events = ref<Types.Event.TicketEvent[]>([]);
 const loading = ref<boolean>(false);
 const isFind = ref<boolean | null>(null);
+const snackbar = ref<boolean>(false);
 const onClick = async () => {
   try {
     if (keyword.value) {
@@ -62,5 +66,9 @@ const onClick = async () => {
   } catch (err) {
     console.log(err);
   }
+};
+
+const openDialog = () => {
+  snackbar.value = true;
 };
 </script>

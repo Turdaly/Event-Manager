@@ -21,10 +21,12 @@ const props = defineProps({
 });
 
 const eventsStore = useEventsStore()
+
+const emit = defineEmits(['openDialog'])
 const onClick = async (event) => {
   const response = await eventsStore.postTicketEvent(event)
   if(response === true) {
-
+    emit('openDialog')
   }
 }
 
