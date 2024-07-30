@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="t-mb-5"><HeaderMenu /></div>
+    <div class="t-mb-5"><HeaderMenu/></div>
     <FormEvent >
       <template v-slot:title>
         Livestream

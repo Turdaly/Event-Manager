@@ -26,6 +26,28 @@ declare global {
         startDate: string;
         link_address: string;
       }
+      export interface TicketEvent {
+        id: string;
+        name: string;
+        dates: {
+          start: {
+            localDate: string;
+            localTime?: string;
+            timeTBA?: boolean;
+          };
+        };
+        _embedded: {
+          venues: {
+            city: {
+              name: string;
+            };
+            state: {
+              stateCode: string;
+            };
+            name: string;
+          }[];
+        };
+      }
       export interface Attribute {
         dates: string;
         highlight: {

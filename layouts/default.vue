@@ -97,9 +97,9 @@ const menuItems = [
   { title: "Dashboard", link: "index", icon: "material-symbols:home" },
   { title: "Events", link: "events", icon: "material-symbols:calendar-month" },
   {
-    title: "Settings",
-    link: "index",
-    icon: "material-symbols:settings-outline",
+    title: "Search",
+    link: "search",
+    icon: "ph:ticket-bold",
   },
 ];
 const headerItems = [

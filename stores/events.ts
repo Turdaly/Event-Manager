@@ -16,6 +16,29 @@ export const useEventsStore = defineStore("events", () => {
       console.log(err);
     }
   };
+  const postTicketEvent = async (data: Types.Event.TicketEvent) => {
+    try {
+      if (data) {
+        const venue = data._embedded.venues[0];
+        const newData = {
+          id: data.id,
+          email: auth.user.email,
+          title: data.name,
+          color: "#5271ff",
+          type: "offline-meeting",
+          isComplete: false,
+          startTime: data.dates.start.localTime || "TBA",
+          startDate: data.dates.start.localDate,
+          link_address: `${venue.city.name}, ${venue.state.stateCode} ${venue.name}`,
+        };
+        const response = await $api.post(url, newData);
+        if(response)
+        console.log(response);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const fetchEvents = async () => {
     try {
       const response = await $api.get(url);
@@ -56,14 +79,10 @@ export const useEventsStore = defineStore("events", () => {
   ]);
 
   const getOnlineMeeting = computed((): Types.Event.MyEvent[] => {
-    return myEvents.value.filter(
-      (event) => event.type === "online-meeting"
-    );
+    return myEvents.value.filter((event) => event.type === "online-meeting");
   });
   const getOfflineMeeting = computed(() => {
-    return myEvents.value.filter(
-      (event) => event.type === "offline-meeting"
-    );
+    return myEvents.value.filter((event) => event.type === "offline-meeting");
   });
   const getWebinarMeeting = computed(() => {
     return myEvents.value.filter((event) => event.type === "webinar");
@@ -106,5 +125,6 @@ export const useEventsStore = defineStore("events", () => {
     postEvent,
     fetchEvents,
     removeEvent,
+    postTicketEvent,
   };
 });

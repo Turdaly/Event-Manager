@@ -19,7 +19,7 @@
         </p>
       </div>
     </div>
-    
+
     <!-- Calendar -->
     <div class="t-flex t-flex-col t-p-6 t-bg-primary t-rounded-lg t-shadow-md">
       <h3 class="t-text-xl t-font-medium t-mb-4">Calendar</h3>
@@ -97,6 +97,7 @@
 </template>
 
 <script setup lang="ts">
+
 const eventsStore = useEventsStore();
 
 // Calendar
