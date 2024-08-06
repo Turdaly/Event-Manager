@@ -1,15 +1,16 @@
 import { defineStore } from "pinia";
-
 export const useEventsStore = defineStore("events", () => {
   const auth = useAuth();
   const { $api } = useNuxtApp();
   const url = "/myEvents";
   const myEvents = ref<Types.Event.MyEvent[]>([]);
-
+  const postCounter = ref<number>(10);
+  const fetchCounter = ref<number>(0);
   // Request
   const postEvent = async (data: Types.Event.MyEvent) => {
     try {
       const response = await $api.post(url, data);
+      postCounter.value++;
       console.log(response);
       return true;
     } catch (err) {
@@ -32,8 +33,9 @@ export const useEventsStore = defineStore("events", () => {
           link_address: `${venue.city.name}, ${venue.state.stateCode} ${venue.name}`,
         };
         const response = await $api.post(url, newData);
-        if(response){
-          return true
+        postCounter.value++;
+        if (response) {
+          return true;
         }
         console.log(response);
       }
@@ -42,22 +44,27 @@ export const useEventsStore = defineStore("events", () => {
     }
   };
   const fetchEvents = async () => {
-    try {
-      const response = await $api.get(url);
-      if (response.data) {
-        myEvents.value = response.data.filter(
-          (event: Types.Event.MyEvent) => event.email === auth.user.email
-        );
+    if (postCounter.value > fetchCounter.value) {
+      fetchCounter.value = postCounter.value;
+      console.log(postCounter.value, fetchCounter.value);
+      try {
+        const response = await $api.get(url);
+        if (response.data) {
+          myEvents.value = response.data.filter(
+            (event: Types.Event.MyEvent) => event.email === auth.user.email
+          );
+        }
+        console.log("MyEvents:", myEvents.value);
+      } catch (err) {
+        console.log(err);
       }
-      console.log("MyEvents:", myEvents.value);
-    } catch (err) {
-      console.log(err);
     }
   };
   const removeEvent = async (id: string) => {
     try {
       if (id) {
         await $api.delete(`${url}/${id}`);
+        postCounter.value++;
         await fetchEvents();
       }
     } catch (err) {
