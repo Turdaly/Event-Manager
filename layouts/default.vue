@@ -1,5 +1,5 @@
 <template>
-  <div class="t-flex t-h-screen">
+  <div class="t-block md:t-flex t-h-screen">
     <aside
       class="t-h-full t-w-72 t-p-5 t-bg-primary t-flex-col t-hidden md:t-flex"
     >

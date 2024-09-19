@@ -1,6 +1,6 @@
 <template>
-  <div v-if="meetings.length > 0" class="t-p-4">
-    <table class="t-divide-y t-w-full">
+  <div v-if="meetings.length > 0" class="sm:t-p-4">
+    <table class="t-table-fixed t-w-full t-divide-y">
       <thead class="">
         <tr>
           <th
@@ -11,7 +11,7 @@
           </th>
           <th
             scope="col"
-            class="t-px-6 t-py-3 t-text-left t-text-xs t-font-bold t-uppercase t-tracking-wider"
+            class="t-px-6 t-py-3 t-text-left t-text-xs t-font-bold t-uppercase t-tracking-wider t-hidden sm:t-block"
           >
             Start Date & Time
           </th>
@@ -34,15 +34,21 @@
           <td class="t-px-6 t-py-4 t-whitespace-nowrap">
             {{ meeting.title }}
           </td>
-          <td class="t-px-6 t-py-4 t-whitespace-nowrap">
-            {{ meeting.startDate }} {{ meeting.startTime }}
+          <td class="t-px-6 t-py-4 t-whitespace-nowrap t-hidden sm:t-block">
+            {{ meeting.startDate.slice(0, 10) }} <br />
+            & {{ meeting.startTime }}
           </td>
           <td class="t-px-6 t-py-4 t-whitespace-nowrap">
-            <NuxtLink :to="meeting.link_address" target="_blank" class="t-text-accent"
+            <NuxtLink
+              :to="meeting.link_address"
+              target="_blank"
+              class="t-text-accent"
               >Link</NuxtLink
             >
           </td>
-          <td class="t-px-6 t-py-4 t-whitespace-nowrap t-cursor-pointer t-font-bold t-text-accent">
+          <td
+            class="t-px-6 t-py-4 t-whitespace-nowrap t-cursor-pointer t-font-bold t-text-accent"
+          >
             <div class="t-flex t-items-center t-gap-2">
               <MeetingDialog :meeting="meeting" />
               <Icon
@@ -59,9 +65,9 @@
 </template>
 
 <script setup lang="ts">
-const eventsStore = useEventsStore()
+const eventsStore = useEventsStore();
 
 defineProps<{
-  meetings: Types.Event.MyEvent[]
-}>()
+  meetings: Types.Event.MyEvent[];
+}>();
 </script>
