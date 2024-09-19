@@ -97,7 +97,7 @@ const submit = async () => {
               id: Date.now().toString(),
               name: name.value,
               email: email.value,
-              pasword: password.value
+              pasword: password.value,
             };
             await auth.postUser(data);
           }

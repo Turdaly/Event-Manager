@@ -1,6 +1,6 @@
 <template>
   <div class="t-flex t-flex-col t-gap-4">
-    <HeaderMenu/>
+    <HeaderMenu />
     <div class="t-bg-primary t-p-4">
       <div class="t-mb-8">
         <h1 class="t-text-2xl t-font-medium t-mb-1">

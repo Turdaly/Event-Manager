@@ -63,15 +63,16 @@ const selectedEvents = ref<Types.Event.MyEvent[]>([]);
 const isActive = ref(false);
 const handleDayClick = (day: Types.Template.Day) => {
   const events = eventsStore.myEvents.filter(
-    (event) => new Date(event.startDate).toDateString() === day.date.toDateString()
+    (event) =>
+      new Date(event.startDate).toDateString() === day.date.toDateString()
   );
   selectedEvents.value = events;
-  if(selectedEvents.value.length > 0){
+  if (selectedEvents.value.length > 0) {
     isActive.value = true;
   }
 };
 
-onMounted( async () => {
-  await eventsStore.fetchEvents()
-})
+onMounted(async () => {
+  await eventsStore.fetchEvents();
+});
 </script>

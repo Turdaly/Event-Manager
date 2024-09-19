@@ -18,15 +18,24 @@
 
         <v-card-text>
           <p class="text-subtitle-1">
-            Meeting Title: <span class="t-text-accent">{{ meeting.title }}</span>
+            Meeting Title:
+            <span class="t-text-accent">{{ meeting.title }}</span>
           </p>
           <p>
             Start Date & Time:
-            <span class="t-text-accent">{{ meeting.startDate }} {{ meeting.startTime }}</span>
+            <span class="t-text-accent"
+              >{{ meeting.startDate }} {{ meeting.startTime }}</span
+            >
           </p>
           <p>
             Meeting URL:
-            <NuxtLink  :to="meeting.link_address" target="_blank" rel="noopener" class="t-text-accent">{{ meeting.link_address }}</NuxtLink>
+            <NuxtLink
+              :to="meeting.link_address"
+              target="_blank"
+              rel="noopener"
+              class="t-text-accent"
+              >{{ meeting.link_address }}</NuxtLink
+            >
           </p>
         </v-card-text>
       </v-card>
@@ -35,10 +44,10 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps } from 'vue';
+import { ref, defineProps } from "vue";
 
 defineProps<{
-  meeting: Types.Event.MyEvent
+  meeting: Types.Event.MyEvent;
 }>();
 
 const isActive = ref(false);
@@ -46,6 +55,4 @@ const isActive = ref(false);
 const openDialog = () => {
   isActive.value = true;
 };
-
-
 </script>

@@ -87,7 +87,7 @@ const link_address = ref<string>("");
 const loading = ref<boolean>(false);
 
 // Store
-const auth = useAuth()
+const auth = useAuth();
 // form actions
 const eventsStore = useEventsStore();
 const submit = async () => {
@@ -142,6 +142,6 @@ const getEventType = () => {
 };
 
 onMounted(() => {
-  getEventType()
-})
+  getEventType();
+});
 </script>

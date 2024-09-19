@@ -67,11 +67,8 @@ const submit = async () => {
         }) => {
           if (v.valid) {
             await auth.fetchUser();
-            if (
-              auth.validateUserCredentials(email.value, password.value)
-
-            ) {
-              console.log('navigate to index')
+            if (auth.validateUserCredentials(email.value, password.value)) {
+              console.log("navigate to index");
               return navigateTo({ name: "index" });
             }
           }

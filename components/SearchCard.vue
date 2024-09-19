@@ -6,7 +6,10 @@
       <div class="t-text-gray-500">{{ eventLocation }}</div>
     </div>
     <div>
-      <v-btn color="#5271ff" class="text-capitalize bottom-0" @click="onClick(event)"
+      <v-btn
+        color="#5271ff"
+        class="text-capitalize bottom-0"
+        @click="onClick(event)"
         >Add Event</v-btn
       >
     </div>
@@ -20,16 +23,15 @@ const props = defineProps({
   event: Object,
 });
 
-const eventsStore = useEventsStore()
+const eventsStore = useEventsStore();
 
-const emit = defineEmits(['openDialog'])
+const emit = defineEmits(["openDialog"]);
 const onClick = async (event) => {
-  const response = await eventsStore.postTicketEvent(event)
-  if(response === true) {
-    emit('openDialog')
+  const response = await eventsStore.postTicketEvent(event);
+  if (response === true) {
+    emit("openDialog");
   }
-}
-
+};
 
 const formattedTime = computed(() => {
   return props.event.dates.start.timeTBA

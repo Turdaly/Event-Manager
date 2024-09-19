@@ -22,7 +22,7 @@ useSeoMeta({
   author: "Yelnur",
   creator: "Yelnur",
 });
-const auth = useAuth()
+const auth = useAuth();
 
 onMounted(() => {
   const userInLocalStorage = localStorage.getItem("user");

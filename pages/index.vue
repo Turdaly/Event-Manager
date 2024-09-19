@@ -7,10 +7,7 @@
         :key="index"
         class="t-flex t-flex-col t-items-center t-p-6 t-bg-primary t-rounded-lg t-shadow-md"
       >
-        <Icon
-          :name="event.icon"
-          class="t-text-4xl t-mb-4 t-text-accent"
-        />
+        <Icon :name="event.icon" class="t-text-4xl t-mb-4 t-text-accent" />
         <h3 class="t-font-medium t-text-xl t-mb-2">
           {{ event.title }} {{ event.count }}
         </h3>
@@ -33,8 +30,8 @@
       </div>
     </div>
 
-     <!-- Calendar Dialog -->
-     <div
+    <!-- Calendar Dialog -->
+    <div
       v-if="isActive"
       class="t-fixed t-inset-0 t-flex t-items-center t-justify-center t-bg-neutral-600 t-bg-opacity-50 t-z-10"
       @click="isActive = false"
@@ -75,29 +72,20 @@
 
     <!-- My Events -->
     <div class="t-flex t-flex-col t-bg-primary t-p-6 t-rounded-lg t-shadow-md">
-      <h3 class="t-font-medium t-text-xl t-mb-4">
-        My Events
-      </h3>
+      <h3 class="t-font-medium t-text-xl t-mb-4">My Events</h3>
       <p v-if="eventsStore.myEvents.length === 0">
         You have no upcoming events
       </p>
       <EventTable :meetings="eventsStore.myEvents">
-        <template v-slot:title>
-          Meeting Title
-        </template>
-        <template v-slot:address>
-          Meeting Link
-        </template>
-        <template v-slot:message>
-          You have no upcoming events
-        </template>
+        <template v-slot:title> Meeting Title </template>
+        <template v-slot:address> Meeting Link </template>
+        <template v-slot:message> You have no upcoming events </template>
       </EventTable>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-
 const eventsStore = useEventsStore();
 
 // Calendar
@@ -105,16 +93,16 @@ const selectedEvents = ref<Types.Event.MyEvent[]>([]);
 const isActive = ref(false);
 const handleDayClick = (day: Types.Template.Day) => {
   const events = eventsStore.myEvents.filter(
-    (event) => new Date(event.startDate).toDateString() === day.date.toDateString()
+    (event) =>
+      new Date(event.startDate).toDateString() === day.date.toDateString()
   );
   selectedEvents.value = events;
-  if(selectedEvents.value.length > 0){
+  if (selectedEvents.value.length > 0) {
     isActive.value = true;
   }
 };
 
-onMounted( async () => {
-  await eventsStore.fetchEvents()
-})
+onMounted(async () => {
+  await eventsStore.fetchEvents();
+});
 </script>
-
