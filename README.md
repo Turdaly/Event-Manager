@@ -9,6 +9,8 @@ Event Manager is an all-in-one platform where users can easily search for upcomi
 - **Pinia**: State management for managing the application's state
 - **Vuetify**: Material design component framework for building a responsive and clean UI
 - **TypeScript**: Ensures type safety and maintainable code
+- **Tailwind CSS**: Utility-first CSS framework for fast and responsive design
+
   
 
 ## 📱 Features
