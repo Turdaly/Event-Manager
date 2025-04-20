@@ -3,19 +3,19 @@
     <div class="t-mb-5"><HeaderMenu /></div>
     <FormEvent >
       <template v-slot:title>
-        Offline Meeting
+        Офлайн Встречу
       </template>
       <template v-slot:paragraph>
-        Meeting
+        встрече
       </template>
       <template v-slot:labelTitle>
-        Meeting
+        Названия
       </template>
       <template v-slot:labelUrl>
-        Address
+        Ссылка встречи
       </template>
       <template v-slot:textBtn>
-        Meeting
+        Встречу
       </template>
     </FormEvent>
   </div>

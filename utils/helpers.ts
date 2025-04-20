@@ -3,8 +3,8 @@ const regex = {
 }
 
 export const rules = {
-  required: (v: any) => !!v || "Fill in the field",
-  min: (v: string) => v.length > 3 || "Min 4 characters",
-  email: (v: string) => regex.email.test(v) || "Incorrect format",
+  required: (v: any) => !!v || "Заполните это поле",
+  min: (v: string) => v.length > 3 || "Минимум 4 символа",
+  email: (v: string) => regex.email.test(v) || "Неправильный формат",
   matchPassword: (password: string) => (v: string) => v === password || "Пароли не совпадают",
 };

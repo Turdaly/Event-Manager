@@ -9,7 +9,7 @@
           @error="handleLoginError"
         ></GoogleSignInButton>
       </div>
-      <h1 class="t-text-4xl t-text-center t-my-8">Sign Up</h1>
+      <h1 class="t-text-4xl t-text-center t-my-8">Зарегистрироваться</h1>
       <v-form
         ref="form"
         @submit.prevent="submit"
@@ -18,7 +18,7 @@
         <v-text-field
           v-model="name"
           :rules="[rules.required]"
-          label="Name"
+          label="Имя"
           variant="outlined"
         ></v-text-field>
         <v-text-field
@@ -33,7 +33,7 @@
           :rules="[rules.required, rules.min]"
           :type="show1 ? 'text' : 'password'"
           hint="At least 8 characters"
-          label="Password"
+          label="Пароль"
           variant="outlined"
           counter
           @click:append="show1 = !show1"
@@ -43,7 +43,7 @@
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
           :rules="[rules.required, rules.min, rules.matchPassword(password)]"
           :type="show1 ? 'text' : 'password'"
-          label="Re-enter Password"
+          label="Повторно введите пароль"
           variant="outlined"
           counter
           @click:append="show1 = !show1"
@@ -53,13 +53,13 @@
           type="submit"
           size="large"
           color="#5271ff"
-          >Sign Up</v-btn
+          >Зарегистрироваться</v-btn
         >
         <NuxtLink
           :to="{ name: 'login' }"
           class="t-text-sm t-text-accent t-text-center"
         >
-          <p class="t-mt-2">Already have an account? Log In</p>
+          <p class="t-mt-2">У вас уже есть учетная запись? Вход</p>
         </NuxtLink>
       </v-form>
     </div>

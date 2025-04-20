@@ -103,28 +103,28 @@ export const useEventsStore = defineStore("events", () => {
 
   const eventItems = computed(() => [
     {
-      title: "Online Meeting",
+      title: "Онлайн-Встреча",
       count: getOnlineMeeting.value.length,
       icon: "material-symbols:calendar-month",
-      paragraph: "Including Upcoming & Current",
+      paragraph: "Включая предстоящие и текущие",
     },
     {
-      title: "Offline Meeting",
+      title: "Офлайн-Встреча",
       count: getOfflineMeeting.value.length,
       icon: "material-symbols:event-available-rounded",
-      paragraph: "Includes Active & Past Events",
+      paragraph: "Включает активные и прошедшие события",
     },
     {
-      title: "Webinar",
+      title: "Вебинар",
       count: getWebinarMeeting.value.length,
       icon: "material-symbols:chart-data-outline",
-      paragraph: "Including Upcoming & Current",
+      paragraph: "Включая предстоящие и текущие",
     },
     {
-      title: "Livestream",
+      title: "Трансляция",
       count: getLivestreamMeeting.value.length,
       icon: "material-symbols:mail-outline",
-      paragraph: "Including Upcoming & Current",
+      paragraph: "Включая предстоящие и текущие",
     },
   ]);
   return {

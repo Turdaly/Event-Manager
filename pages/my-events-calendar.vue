@@ -2,8 +2,8 @@
   <div>
     <HeaderMenu />
     <div class="t-flex t-flex-col t-p-6 t-bg-primary t-rounded-lg t-shadow-md">
-      <h3 class="t-text-xl t-font-medium t-mb-2">Calendar</h3>
-      <h4 class="t-mb-4">View and edit your events.</h4>
+      <h3 class="t-text-xl t-font-medium t-mb-2">Календарь</h3>
+      <h4 class="t-mb-4">Просматривайте и редактируйте свои события.</h4>
       <div class="t-w-full t-h-full">
         <VCalendar
           :attributes="eventsStore.attributes"
@@ -26,7 +26,7 @@
         @click.stop
       >
         <v-img src="/logo.png" :width="200" alt="Logo" class="mx-auto" />
-        <h3 class="t-text-xl t-font-medium t-text-center">Meeting Details</h3>
+        <h3 class="t-text-xl t-font-medium t-text-center">Детали</h3>
         <div class="t-flex t-flex-col t-gap-4 t-mt-4">
           <div
             v-for="event in selectedEvents"
@@ -34,15 +34,15 @@
             class="t-mt-4 t-flex t-flex-col t-items-between"
           >
             <p class="t-text-lg">
-              <span class="t-font-medium t-mr-1">Meeting Title:</span>
+              <span class="t-font-medium t-mr-1">Названия:</span>
               {{ event.title }}
             </p>
             <p class="t-text-lg">
-              <span class="t-font-medium t-mr-1">Start Date & Time:</span>
+              <span class="t-font-medium t-mr-1">Дата и время начала:</span>
               {{ event.startDate }} {{ event.startTime }}
             </p>
             <p class="t-text-lg">
-              <span class="t-font-medium t-mr-1">Meeting URL:</span>
+              <span class="t-font-medium t-mr-1">Ссылка:</span>
               <a
                 :href="event.link_address"
                 target="_blank"

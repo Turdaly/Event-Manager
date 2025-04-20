@@ -2,11 +2,11 @@
   <section>
     <div class="t-flex t-flex-col t-gap-4 t-bg-primary t-p-4">
       <h1 class="t-text-2xl t-font-medium t-text-center">
-        Let's create your <slot name="title">Meeting</slot>
+        Давайте создадим вашу <slot name="title">Встречу</slot>
       </h1>
       <h3 class="t-text-center">
-        Start with the key details about your
-        <slot name="paragraph">Meeting</slot>
+        Начните с ключевых сведений о вашем
+        <slot name="paragraph">Встреча</slot>
       </h3>
       <v-form
         ref="form"
@@ -21,14 +21,14 @@
           base-color="#5271ff"
         >
           <template v-slot:label>
-            <slot name="labelTitle">Meeting</slot> Title
+            <slot name="labelTitle">Название</slot>
           </template>
         </v-text-field>
         <div class="t-flex t-gap-2">
           <v-date-input
             v-model="startDate"
             :rules="[rules.required]"
-            label="Start Date"
+            label="Дата начала"
             variant="outlined"
             color="#5271ff"
             base-color="#5271ff"
@@ -40,7 +40,7 @@
             :rules="[rules.required]"
             :active="modal2"
             :focused="modal2"
-            label="Start Time"
+            label="Время начала"
             variant="outlined"
           >
             <v-dialog v-model="modal2" activator="parent" width="auto">
@@ -64,7 +64,7 @@
           color="#5271ff"
           size="large"
         >
-          Create <slot name="textBtn">Meeting</slot>
+          Создать <slot name="textBtn">Собрание</slot>
         </v-btn>
       </v-form>
     </div>

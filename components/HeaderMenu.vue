@@ -16,8 +16,8 @@
 
 <script setup lang="ts">
 const headerItems: Types.Template.HeaderItem[] = [
-  { title: "Create Event", link: "events" },
-  { title: "My Events", link: "my-events" },
-  { title: "Calendar", link: "my-events-calendar" },
+  { title: "Создать", link: "events" },
+  { title: "Мои Мероприятия", link: "my-events" },
+  { title: "Календарь", link: "my-events-calendar" },
 ];
 </script>

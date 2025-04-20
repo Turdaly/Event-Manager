@@ -9,8 +9,7 @@
         class="mx-auto"
       ></v-img>
       <p class="t-font-bold t-text-sm t-max-w-sm t-text-center">
-        Event Manager offers a comprehensive solution for organizing and
-        managing your events.
+        Event Manager предлагает комплексное решение для организации и управления вашими мероприятиями
       </p>
     </header>
     <main class="t-w-full">

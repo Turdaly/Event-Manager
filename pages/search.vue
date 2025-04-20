@@ -9,13 +9,13 @@
         density="compact"
         base-color="#5271ff"
         color="#5271ff"
-        label="Search Event by Name, Artis, Genre, Location"
+        label="Поиск мероприятия по названию, исполнителю, жанру, местоположению"
         autofocus
         hide-details
         @click:append-inner="onClick"
         @keyup.enter="onClick"
       ></v-text-field>
-      <h1 class="t-text-2xl">Upcoming Events</h1>
+      <h1 class="t-text-2xl">Предстоящие события</h1>
       <div v-if="isFind === true">
         <div
           v-for="event in events"

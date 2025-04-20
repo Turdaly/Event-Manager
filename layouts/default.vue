@@ -31,7 +31,7 @@
                 class="t-flex t-items-center t-gap-3 t-px-6 t-py-2 hover:t-bg-hover t-cursor-pointer"
               >
                 <Icon name="tabler:logout-2" class="t-size-6 t-text-accent" />
-                Logout
+                Выход
               </li>
             </ul>
           </div>
@@ -56,11 +56,11 @@
         <nav class="t-hidden md:t-flex t-gap-4 t-justify-end">
           <NuxtLink :to="{ name: 'my-events' }"
             ><v-btn variant="outlined" color="#5271ff">
-              My Events
+              Мои Мероприятия
             </v-btn></NuxtLink
           >
           <NuxtLink :to="{ name: 'events' }">
-            <v-btn color="#5271ff"> Create Event </v-btn>
+            <v-btn color="#5271ff"> Создать событие </v-btn>
           </NuxtLink>
         </nav>
         <div class="t-flex t-justify-end md:t-hidden">
@@ -94,17 +94,17 @@
 <script setup lang="ts">
 const auth = useAuth();
 const menuItems = [
-  { title: "Dashboard", link: "index", icon: "material-symbols:home" },
-  { title: "Events", link: "events", icon: "material-symbols:calendar-month" },
+  { title: "Панель", link: "index", icon: "material-symbols:home" },
+  { title: "Событие", link: "events", icon: "material-symbols:calendar-month" },
   {
-    title: "Search",
+    title: "Поиск",
     link: "search",
     icon: "ph:ticket-bold",
   },
 ];
 const headerItems = [
-  { title: "My Events ", link: "my-events" },
-  { title: "Create Event", link: "events" },
+  { title: "Мои мероприятия ", link: "my-events" },
+  { title: "Создать событие", link: "events" },
 ];
 const menu = [...headerItems, ...menuItems];
 </script>

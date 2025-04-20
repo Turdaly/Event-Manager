@@ -7,7 +7,7 @@
           @error="handleLoginError"
         ></GoogleSignInButton>
       </div>
-      <h1 class="t-text-4xl t-text-center t-my-8 t-text-">Log In</h1>
+      <h1 class="t-text-4xl t-text-center t-my-8 t-text-">Вход</h1>
       <v-form
         ref="form"
         @submit.prevent="submit"
@@ -23,7 +23,7 @@
           v-model="password"
           :rules="[rules.required, rules.min]"
           type="password"
-          label="Password"
+          label="Пароль"
           variant="outlined"
         ></v-text-field>
         <v-btn
@@ -31,12 +31,12 @@
           size="large"
           color="#5271ff"
           class="text-capitalize w-100"
-          >Sign Up</v-btn
+          >Вход</v-btn
         >
         <NuxtLink
           :to="{ name: 'auth' }"
           class="t-text-sm t-text-accent t-text-center"
-          ><p class="t-mt-2">Create a new account</p></NuxtLink
+          ><p class="t-mt-2">Создать учетный запись</p></NuxtLink
         >
       </v-form>
     </div>

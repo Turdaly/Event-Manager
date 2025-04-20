@@ -3,19 +3,19 @@
     <div class="t-mb-5"><HeaderMenu/></div>
     <FormEvent >
       <template v-slot:title>
-        Livestream
+        Прямую Трансляцию
       </template>
       <template v-slot:paragraph>
-        Livestream
+        трансляции
       </template>
       <template v-slot:labelTitle>
-        Livestream
+        Названия
       </template>
       <template v-slot:labelUrl>
-        Livestream Url
+        Ссылка трансляции
       </template>
       <template v-slot:textBtn>
-        Livestream
+        Трансляцию
       </template>
     </FormEvent>
   </div>

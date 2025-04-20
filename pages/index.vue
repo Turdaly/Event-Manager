@@ -19,7 +19,7 @@
 
     <!-- Calendar -->
     <div class="t-flex t-flex-col t-p-6 t-bg-primary t-rounded-lg t-shadow-md">
-      <h3 class="t-text-xl t-font-medium t-mb-4">Calendar</h3>
+      <h3 class="t-text-xl t-font-medium t-mb-4">Календарь</h3>
       <div class="t-w-full t-h-full">
         <VCalendar
           :attributes="eventsStore.attributes"
@@ -41,7 +41,7 @@
         @click.stop
       >
         <v-img src="/logo.png" :width="200" alt="Logo" class="mx-auto" />
-        <h3 class="t-text-xl t-font-medium t-text-center">Meeting Details</h3>
+        <h3 class="t-text-xl t-font-medium t-text-center">Подробности встречи</h3>
         <div class="t-flex t-flex-col t-gap-4 t-mt-4">
           <div
             v-for="event in selectedEvents"
@@ -49,15 +49,15 @@
             class="t-mt-4 t-flex t-flex-col t-items-between"
           >
             <p class="t-text-lg">
-              <span class="t-font-medium t-mr-1">Meeting Title:</span>
+              <span class="t-font-medium t-mr-1">Названия:</span>
               {{ event.title }}
             </p>
             <p class="t-text-lg">
-              <span class="t-font-medium t-mr-1">Start Date & Time:</span>
+              <span class="t-font-medium t-mr-1">Дата и время начала:</span>
               {{ event.startDate }} {{ event.startTime }}
             </p>
             <p class="t-text-lg">
-              <span class="t-font-medium t-mr-1">Meeting URL:</span>
+              <span class="t-font-medium t-mr-1">Ссылка:</span>
               <a
                 :href="event.link_address"
                 target="_blank"
@@ -72,14 +72,14 @@
 
     <!-- My Events -->
     <div class="t-flex t-flex-col t-bg-primary t-p-6 t-rounded-lg t-shadow-md">
-      <h3 class="t-font-medium t-text-xl t-mb-4">My Events</h3>
+      <h3 class="t-font-medium t-text-xl t-mb-4">Мои Мероприятия</h3>
       <p v-if="eventsStore.myEvents.length === 0">
-        You have no upcoming events
+        У вас нет никаких предстоящих мероприятий
       </p>
       <EventTable :meetings="eventsStore.myEvents">
-        <template v-slot:title> Meeting Title </template>
-        <template v-slot:address> Meeting Link </template>
-        <template v-slot:message> You have no upcoming events </template>
+        <template v-slot:title> Названия </template>
+        <template v-slot:address> Ссылка </template>
+        <template v-slot:message> У вас нет никаких предстоящих мероприятий </template>
       </EventTable>
     </div>
   </div>

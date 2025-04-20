@@ -10,7 +10,7 @@
         color="#5271ff"
         class="text-capitalize bottom-0"
         @click="onClick(event)"
-        >Add Event</v-btn
+        >Добавить Событие</v-btn
       >
     </div>
   </div>

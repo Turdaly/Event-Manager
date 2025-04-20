@@ -1,7 +1,7 @@
 <template>
   <v-dialog max-width="500" v-model="isActive" v-if="meeting">
     <template v-slot:activator="{ props: activatorProps }">
-      <p v-bind="activatorProps" @click="openDialog">View</p>
+      <p v-bind="activatorProps" @click="openDialog">Смотреть</p>
     </template>
     <template v-slot:default>
       <v-card>
@@ -14,21 +14,21 @@
           class="t-mx-auto t-mt-4"
         ></v-img>
 
-        <v-card-title class="t-text-center">Meeting Details</v-card-title>
+        <v-card-title class="t-text-center">Подробности Встречи</v-card-title>
 
         <v-card-text>
           <p class="text-subtitle-1">
-            Meeting Title:
+            Название Встречи:
             <span class="t-text-accent">{{ meeting.title }}</span>
           </p>
           <p>
-            Start Date & Time:
+            Дата и Время Начала:
             <span class="t-text-accent"
               >{{ meeting.startDate }} {{ meeting.startTime }}</span
             >
           </p>
           <p>
-            Meeting URL:
+            URL-Адрес Собрания:
             <NuxtLink
               :to="meeting.link_address"
               target="_blank"

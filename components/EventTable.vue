@@ -7,25 +7,25 @@
             scope="col"
             class="t-px-6 t-py-3 t-text-left t-text-xs t-font-bold t-uppercase t-tracking-wider"
           >
-            <slot name="title">Title</slot>
+            <slot name="title">Название</slot>
           </th>
           <th
             scope="col"
             class="t-px-6 t-py-3 t-text-left t-text-xs t-font-bold t-uppercase t-tracking-wider t-hidden sm:t-block"
           >
-            Start Date & Time
+            Дата и время начала
           </th>
           <th
             scope="col"
             class="t-px-6 t-py-3 t-text-left t-text-xs t-font-bold t-uppercase t-tracking-wider"
           >
-            <slot name="address">Link & Address</slot>
+            <slot name="address">Ссылка и адрес</slot>
           </th>
           <th
             scope="col"
             class="t-px-6 t-py-3 t-text-left t-text-xs t-font-bold t-uppercase t-tracking-wider"
           >
-            Settings
+            Настройки
           </th>
         </tr>
       </thead>
@@ -43,7 +43,7 @@
               :to="meeting.link_address"
               target="_blank"
               class="t-text-accent"
-              >Link</NuxtLink
+              >Ссылка</NuxtLink
             >
           </td>
           <td
